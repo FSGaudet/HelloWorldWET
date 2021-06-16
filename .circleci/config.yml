@@ -13,11 +13,16 @@ jobs:
       - run:
           name: Run validation
           command: |
-            node_modules/.bin/html-validate MyPage.html
+            node_modules/.bin/html-validate "*.html"
       - run:
           name: Show version
           command: |
-            html-validate --version
+            node_modules/.bin/html-validate --version
+      - store_test_results:
+          path: test-results
+      # Grab the file and attach them to the build to access in different way
+      - store_artifacts:
+          path: test-results
 workflows:
   build_test:
     jobs:
